@@ -7,32 +7,32 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-docs:
-  name: documentation
-  runs-on: ubuntu-22.04
-  steps:
-    - name: Hello
-      run: | 
-        mkdir -p dist
-        echo "hello, world\n" > demo.txt
-        pwd
-        ls -l
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: dist-without-markdown
-        path: dist
-deploys:
-  needs:
-    - build
-    - docs
-  runs-on: ubuntu-22.04
-  steps:
-    - name: Download a single artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: hell0
-    - run: |
-        pwd
-        ls -s
-    - run: echo "done"
+  docs:
+    name: documentation
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Hello
+        run: | 
+          mkdir -p dist
+          echo "hello, world\n" > demo.txt
+          pwd
+          ls -l
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-without-markdown
+          path: dist
+  deploys:
+    needs:
+      - build
+      - docs
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: hell0
+      - run: |
+          pwd
+          ls -s
+      - run: echo "done"
